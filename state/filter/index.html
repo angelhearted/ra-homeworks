@@ -17,7 +17,7 @@
   <script type="text/babel" src="./js/App.js"></script>
   <script type="text/babel">
     const filters = ["All", "Websites", "Flayers", "Business Cards"];
-    const projects = [{
+    const allProjects = [{
       img: "./i/mon.jpg",
       category: "Business Cards"
     }, {
@@ -71,7 +71,7 @@
     }];
 
     ReactDOM.render(
-      <App filters={filters} projects={projects} />,
+      <App filters={filters} allProjects={allProjects} />,
       document.getElementById('root')
     );
   </script>
