@@ -8,9 +8,35 @@ const viewModes = {
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.layouts = props.layouts;
     this.state = {
-      viewMode: viewModes.CARD
+      viewMode: viewModes.CARD,
+      layout: { md: this.layouts['md'] }
     };
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+  }
+
+  componentDidMount() {
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
+  }
+  
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+  
+  updateWindowDimensions() {
+    const w = window.innerWidth;
+    console.log(w)
+    this.setState({
+      layout: w < 320
+        ? { xs: this.layouts['xs'] }
+        : w < 460
+        ? { sm: this.layouts['sm'] }
+        : w < 800
+        ? { md: this.layouts['md'] }
+        : { lg: this.layouts['lg'] }
+    });
   }
 
   render() {
@@ -30,7 +56,7 @@ class App extends React.Component {
     return (
       this.state.viewMode === viewModes.CARD
       ? <CardsView
-        layout={this.props.layout}
+        layout={this.state.layout}
         cards={this.getShopItems(this.props.products)} />
       : <ListView items={this.getShopItems(this.props.products)} />
     );

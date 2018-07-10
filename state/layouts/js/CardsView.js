@@ -4,7 +4,7 @@ const CardsView = (props) => {
   const { layout, cards } = props;
 
   const getLayoutClasses = layout => {
-    return Object.keys(layout).map(key => `col-${key}-${layout[key]}`).join(" ");
+    return Object.keys(layout).map(key => `col-${key}-${layout[key]}`);
   };
 
   const layoutClasses = getLayoutClasses(layout);
