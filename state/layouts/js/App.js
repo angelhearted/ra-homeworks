@@ -1,34 +1,42 @@
 'use strict';
 
-const VIEW_LIST = "view_list";
-const VIEW_MODULE = "view_module";
+const viewModes = {
+  LIST: 'view_list',
+  CARD: 'view_module'
+}
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      viewMode: viewModes.CARD
+    };
+  }
+
   render() {
     return (
       <div>
         <div className="toolbar">
           <IconSwitch
-            icon={VIEW_MODULE}
-            onSwitch={() => console.log("сменился тип вывода")} />
+            icon={this.state.viewMode}
+            onSwitch={this.setNextViewMode.bind(this)} />
         </div>
-        {this.renderLayout(true)}
+        {this.renderLayout()}
       </div>
     );
   }
 
-  renderLayout(cardView) {
-    if (cardView) {
-      return (
-        <CardsView
-          layout={this.props.layout}
-          cards={this.getShopItems(this.props.products, cardView)} />
-      );
-    }
-    return (<ListView items={this.getShopItems(this.props.products, cardView)} />);
+  renderLayout() {
+    return (
+      this.state.viewMode === viewModes.CARD
+      ? <CardsView
+        layout={this.props.layout}
+        cards={this.getShopItems(this.props.products)} />
+      : <ListView items={this.getShopItems(this.props.products)} />
+    );
   }
 
-  getShopItems(products, cardView) {
+  getShopItems(products) {
     return products.map(product => {
       let cardProps = {
         title: product.name,
@@ -36,12 +44,16 @@ class App extends React.Component {
         img: product.img,
         price: `$${product.price}`
       };
-      if (cardView) {
-        return (
-          <ShopCard {...cardProps}/>
-        );
-      }
-      return (<ShopItem {...cardProps}/>)
+
+      return (
+        this.state.viewMode === viewModes.CARD
+          ? <ShopCard {...cardProps} />
+          : <ShopItem {...cardProps} />
+      );
     });
+  }
+
+  setNextViewMode() {
+    this.setState({viewMode: this.state.viewMode === viewModes.CARD ? viewModes.LIST : viewModes.CARD});
   }
 }
