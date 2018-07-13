@@ -1,7 +1,7 @@
 'use strict';
 
 const Item = ({color, item}) => (
-  <figure className={`snip1171 ${color}`}>
+  <figure className={`snip1171 ${color || (item.type === 'unisex' ? 'black' : item.type === 'male' ? 'blue' : 'orange')}`}>
     <img src={item.pic} alt={item.title} />
     <div className="price">${item.price.toFixed(2)}</div>
     <figcaption>
