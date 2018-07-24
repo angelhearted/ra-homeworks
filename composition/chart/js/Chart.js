@@ -10,10 +10,6 @@ class Chart extends React.Component {
     return Types;
   }
 
-  /*constructor(props) {
-    super(props);
-  }*/
-
   getClass() {
     return this.props.type === Types.STACKED
       ? 'stacked'
