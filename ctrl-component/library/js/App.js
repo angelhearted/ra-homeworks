@@ -10,9 +10,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    BookApi.query(this.state.query).then(books => {
-      this.setState({ books })
-    })
+    this.filterBooks(this.state.query);
   }
 
   filterBooks = query => {
@@ -29,12 +27,13 @@ class App extends React.Component {
           <div className="search-books-bar">
             <div className="search-books-input-wrapper">
               <SearchBox value={this.state.query}
-                filterBooks={this.filterBooks} />
+                filterBooks={this.filterBooks.bind(this)} />
             </div>
           </div>
 
           <div className="search-books-results">
-            <Bookshelf books={this.state.books} filterBooks={this.filterBooks} />
+            <Bookshelf books={this.state.books}
+              filterBooks={this.filterBooks.bind(this)} />
           </div>
         </div>
       </div>
