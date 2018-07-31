@@ -12,6 +12,20 @@
 
 **!** `this` is set at the moment the function is called. If you pass `this.func` as a function reference, `this` is not carried through the call. Which means inside the function body `this` will be `undefined`. If you want to pass it with the reference, you need to use `this.func.bind(this)` or use the .
 
+#### ES6 (2015) features
+
+* Property shorthand
+
+No key needed in object creation when assigning variable with identical key name.
+
+```
+const name = 'Kurt';
+const age = 27;
+const personData = {name, age};
+// is same as
+const personDataCopy = {name: name, age: age};
+```
+
 ## React
 
 How **ref**s work?
