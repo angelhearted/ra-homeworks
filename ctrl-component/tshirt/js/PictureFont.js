@@ -4,8 +4,8 @@ const PictureFont = ({ text, path }) => (
       return char === " "
         ? <div className="space" key={`space-${i}`} />
         : <div className="char" key={`${char}-${i}`}>
-          <img className="font-img" src={`${path}/${char}.jpg`} alt={char} />
-        </div>
+            <img className="font-img" src={`${path}/${char}.jpg`} alt={char} />
+          </div>
     })}
   </div>
 );

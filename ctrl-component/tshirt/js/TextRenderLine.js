@@ -1,7 +1,8 @@
-const TextRenderLine = ({ value, onChange }) => {
+const TextRenderLine = ({ onChange }) => {
   return (
     <div className="type-text">
-      Наберите текст
+      Введите текст:
+      <input type='text' onChange={(e) => onChange(e.target.value)} />
 		</div>
   );
 };
