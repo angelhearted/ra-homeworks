@@ -27,3 +27,44 @@ const Profile = props => {
     </div>
   );
 };
+
+Profile.defaultProps = {
+  img: './images/profile.jpg',
+  birthday: '<empty>'
+}
+
+Profile.propTypes = {
+  img: PropTypes.string,
+  url: urlPropType,
+  birthday: birthdayPropType
+}
+
+function urlPropType(props) {
+  const {url} = props;
+  const isValid = (typeof url === 'string')
+    && /^https:\/\/vk\.com\/(id[0-9]+|[A-Za-z0-9_-]+)$/.test(url);
+
+  return isValid
+    ? null
+    : new Error(`'url' is not valid: ${url}`);
+}
+
+const getCurrentDateStr = () => {
+  const today = new Date();
+  const year = today.getFullYear();
+  let month = (today.getMonth() + 1).toString().replace(/^(\d)$/, '0$1');
+  let date = today.getDate().toString().replace(/^(\d)$/, '0$1');
+
+  return `${year}-${month}-${date}`;
+}
+
+function birthdayPropType(props) {
+  const {birthday} = props;
+  const isValid = (typeof birthday === 'string')
+    && /\d{4}-\d{2}-\d{2}/.test(birthday)
+    && birthday < getCurrentDateStr();
+
+  return isValid
+    ? null
+    : new Error(`'birthday' is not valid: ${birthday}`);
+}

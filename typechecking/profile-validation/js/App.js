@@ -37,7 +37,7 @@ class App extends React.Component {
           first_name: 'Oleg',
           last_name: 'Konev',
           url: 'https://vk.com/id62',
-          birthday: '1974-02-11'
+          birthday: '2074-02-11'
         }
       ]
     };
