@@ -6,15 +6,15 @@ const Form = (props) => {
       <h1 className="text-center">Регистрация</h1>
       <hr/>
       <form onSubmit={props.handleSubmit}>
-        <TextInput label="Email" type="email" name="email" onChange={props.handleChange} value={props.email}
-                   required={true}/>
+        <TextInput label="Email" type="email" name="email" onChange={props.handleChange}
+          value={props.email} required={true}/>
         <TextInput label="Имя" type="text" name="first_name" onChange={props.handleChange}
-                   value={props.first_name}/>
+          value={props.first_name}/>
         <TextInput label="Фамилия" type="text" name="last_name" onChange={props.handleChange}
-                   value={props.last_name}/>
+          value={props.last_name}/>
         <DateInput label="День Рождения" name="birthday" onChange={props.handleChange} value={props.birthday}/>
         <TextInput label="Пароль" type="password" name="password" onChange={props.handleChange}
-                   value={props.password}/>
+          value={props.password}/>
         <RadioGroup label="Пол" name="sex" onChange={props.handleChange} value={props.sex} list={['муж', 'жен']}/>
 
         <button type="submit" className="btn btn-primary mt-2 float-right">Зарегистрироваться</button>
