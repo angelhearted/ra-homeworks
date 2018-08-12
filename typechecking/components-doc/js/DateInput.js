@@ -15,10 +15,10 @@ DateInput.propTypes = {
 };
 
 DateInput.defaultProps = {
-  value: currDateFormat()
+  value: currDateStr()
 };
 
-function currDateFormat() {
+function currDateStr() {
   const today = new Date();
   const year = today.getFullYear();
   let month = (today.getMonth() + 1).toString().replace(/^(\d)$/, '0$1');
