@@ -17,4 +17,4 @@ const DateTimePretty = ({date}) => {
         ? Math.ceil(dateDiff / 60 / 60 / 1000) + ' часов назад'
         : Math.ceil(dateDiff / 24 / 60 / 60 / 1000) + ' дней назад';
     return <DateTime date={datePretty} />
-}
+};
