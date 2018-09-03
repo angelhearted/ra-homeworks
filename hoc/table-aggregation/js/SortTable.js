@@ -22,3 +22,9 @@ const SortTable = props => {
         </div>
     );
 };
+
+const dateSort = (a, b) => a.date > b.date ? 1 : -1;
+
+const SortTableDesc = props => {
+    return SortTable({list: props.list.sort(dateSort)});
+};

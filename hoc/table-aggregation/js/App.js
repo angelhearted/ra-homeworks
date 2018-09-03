@@ -17,10 +17,10 @@ class App extends React.Component {
     render() {
         return (
             <div id="app">
-                <MonthTable list={this.state.list} />
-                <YearTable list={this.state.list} />
-                <SortTable list={this.state.list} />
+                <MonthTableAdapted list={this.state.list} />
+                <YearTableAdapted list={this.state.list} />
+                <SortTableDesc list={this.state.list} />
             </div>
         );
     }
-};
+}

@@ -22,3 +22,22 @@ const YearTable = props => {
         </div>
     );
 };
+
+const YearTableAdapted = props => {
+    const yearedProps = {};
+    yearedProps.list = [];
+
+    props.list.forEach(p => {
+        const year = new Date(p.date).getFullYear();
+        // init zero numbers for each year
+        yearedProps.list.find(el => el.year === year)
+            || yearedProps.list.push({year: year, amount: 0});
+
+        yearedProps.list.find(el => el.year === year).amount += p.amount;
+    });
+
+    // sort by year
+    yearedProps.list = yearedProps.list.sort((a, b) => a.year - b.year);
+
+    return YearTable(yearedProps);
+};
