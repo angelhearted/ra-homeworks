@@ -1,6 +1,6 @@
 const SearchBox = props => {
   return (
-    <input type="text" placeholder="Поиск по названию или автору"
-      onChange={e => props.filterBooks(e.target.value)} value={props.value}/>
+    <input type="text" placeholder="Поиск по названию или автору" value={props.value}
+      onChange={e => typeof props.filterBooks === 'function' && props.filterBooks(e.target.value)} />
   );
 };
