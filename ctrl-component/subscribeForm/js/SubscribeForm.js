@@ -12,7 +12,7 @@ const SubscribeForm = () => {
       form.classList.remove('is-valid');
       form.classList.add('is-error');
     }
-  }
+  };
 
   return (
     <div className="subscribe__form">
