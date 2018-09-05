@@ -11,7 +11,7 @@ function FeedbackForm({data, onSubmit}) {
     data.message = form.message.value;
     data.snacks = Array.from(form.snacks).filter(el => el.checked).map(el => el.value);
     onSubmit(JSON.stringify(data));
-  }
+  };
 
   return (
     <form className="content__form contact-form" ref={contForm => form = contForm}>
