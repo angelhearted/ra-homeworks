@@ -1,32 +1,47 @@
-const SubscribeForm = () => {
-  let form;
+class SubscribeForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isValid: false,
+      isError: false
+    }
+  }
 
-  const handleInput = e => {
+  handleInput(e) {
     if (e.target.value === '') {
-      form.classList.remove('is-valid');
-      form.classList.remove('is-error');
+      this.setState({
+        isValid: false,
+        isError: false
+      });
     } else if (e.target.validity.valid) {
-      form.classList.remove('is-error');
-      form.classList.add('is-valid');
+      this.setState({
+        isValid: true,
+        isError: false
+      });
     } else {
-      form.classList.remove('is-valid');
-      form.classList.add('is-error');
+      this.setState({
+        isValid: false,
+        isError: true
+      });
     }
   };
 
-  return (
-    <div className="subscribe__form">
-      <form className='form form--subscribe' ref={el => form = el}>
-        <h4 className="form-title">Подписаться:</h4>
-        <div className="form-group">
-          <label htmlFor="input-email" className="sr-only">Email</label>
-          <input type="email" id="input-email" placeholder="Email" className="form-control" onChange={handleInput}/>
-          <div className="form-error">Пожалуйста, проверьте корректность адреса электронной почты</div>
-          <button type="submit" className="form-next">
-            <i className="material-icons">keyboard_arrow_right</i>
-          </button>
-        </div>
-      </form>
-    </div>
-  );
-};
+  render() {
+    return (
+      <div className="subscribe__form">
+        <form className={`form form--subscribe ${this.state.isValid ? 'is-valid' : ''} ${this.state.isError ? 'is-error' : ''}`}
+          ref={el => this.form = el}>
+          <h4 className="form-title">Подписаться:</h4>
+          <div className="form-group">
+            <label htmlFor="input-email" className="sr-only">Email</label>
+            <input type="email" id="input-email" placeholder="Email" className="form-control" onChange={this.handleInput.bind(this)}/>
+            <div className="form-error">Пожалуйста, проверьте корректность адреса электронной почты</div>
+            <button type="submit" className="form-next">
+              <i className="material-icons">keyboard_arrow_right</i>
+            </button>
+          </div>
+        </form>
+      </div>
+    )
+  }
+}
