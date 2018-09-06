@@ -4,7 +4,7 @@ const FontSelector = ({ fonts, selectedFont, onSelect }) => {
       {fonts.map((f, i) => 
         <div className="grid center font-item">
           <input type="radio" name="font" value={`abc${i}`} id={`abc${i}`}
-            onClick={() => onSelect(f)} checked={f === selectedFont} />
+            onClick={() => typeof onSelect === 'function' && onSelect(f)} checked={f === selectedFont} />
           <label htmlFor={`abc${i}`} className="grid-1">
             <PictureFont text='abc' path={f.path} />
           </label>
