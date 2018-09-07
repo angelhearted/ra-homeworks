@@ -9,12 +9,22 @@ const Video = props => {
     )
 };
 
-const DateTimePretty = ({date}) => {
-    const dateDiff = Date.now() - Date.parse(date);
-    const datePretty = dateDiff < 60 * 60 * 1000
-        ? Math.ceil(dateDiff / 60 / 1000) + ' мтнут назад'
-        : dateDiff < 24 * 60 * 60 * 1000
-        ? Math.ceil(dateDiff / 60 / 60 / 1000) + ' часов назад'
-        : Math.ceil(dateDiff / 24 / 60 / 60 / 1000) + ' дней назад';
-    return <DateTime date={datePretty} />
+class DateTimePretty extends React.Component {
+
+    minute = 60 * 1000;
+    hour = 60 * this.minute;
+    day = 24 * this.hour;
+
+    datePretty = date => {
+        const dateDiff = Date.now() - Date.parse(date);
+        return dateDiff < this.hour
+            ? Math.ceil(dateDiff / this.minute) + ' мтнут назад'
+            : dateDiff < this.day
+            ? Math.ceil(dateDiff / this.hour) + ' часов назад'
+            : Math.ceil(dateDiff / this.day) + ' дней назад';
+    }
+
+    render() {
+        return <DateTime date={this.datePretty(this.props.date)} />
+    }
 };
