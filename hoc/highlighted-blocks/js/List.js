@@ -1,25 +1,25 @@
 'use strict';
 
-const List = props => {
-  return props.list.map(item => withStyle(item, getComponent));
-};
+const List = props => props.list.map(item => <StyledComponent item={item} />);
 
-function getComponent(item) {
-  return item.type === 'video'
-      ? Video
-      : item.type === 'article'
-      ? Article
-      : null;
-}
+class StyledComponent extends React.Component {
+    getComponent = item => item.type === 'video'
+        ? Video
+        : item.type === 'article'
+        ? Article
+        : null;
 
-function withStyle(item, componentGetter) {
-  const Styler = item.views >= 1000
-      ? Popular
-      : item.views >= 100
-      ? New
-      : null;
-  const Component = componentGetter(item);
-  return Styler
-      ? <Styler><Component {...item}/></Styler>
-      : <Component {...item}/>;
+    getStyler = item => item.views >= 1000
+        ? Popular
+        : item.views >= 100
+        ? New
+        : null;
+
+    render = () => {
+        const Component = this.getComponent(this.props.item);
+        const Styler = this.getStyler(this.props.item);
+        return Styler
+            ? <Styler><Component {...this.props.item}/></Styler>
+            : <Component {...this.props.item}/>;
+    }
 }
