@@ -23,27 +23,29 @@ const MonthTable = props => {
     );
 };
 
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May',
-    'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+class MonthTableAdapted extends React.Component {
+    months = ['Jan', 'Feb', 'Mar', 'Apr', 'May',
+        'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-const MonthTableAdapted = props => {
-    const monthedProps = {};
+    getMonthedList = () => {
+        // init zero numbers for each month
+        const monthedList = this.months.map(m => ( {month: m, amount: 0} ));
 
-    // init zero numbers for each month
-    monthedProps.list = months.map(m => ({month: m, amount: 0}));
+        // current year
+        const year = new Date().getFullYear();
 
-    // current year
-    const year = new Date().getFullYear();
+        this.props.list.forEach(p => {
+            // exclude other years
+            if (!p.date.startsWith(year)) {
+                return;
+            }
 
-    props.list.forEach(p => {
-        // exclude other years
-        if (!p.date.startsWith(year)) {
-            return;
-        }
+            const month = this.months[(new Date(p.date)).getMonth()];
+            monthedList[this.months.indexOf(month)].amount += p.amount;
+        });
 
-        const month = months[(new Date(p.date)).getMonth()];
-        monthedProps.list[months.indexOf(month)].amount += p.amount;
-    });
+        return monthedList;
+    }
 
-    return MonthTable(monthedProps);
+    render = () => <MonthTable list={this.getMonthedList()} />;
 };

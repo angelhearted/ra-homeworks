@@ -23,21 +23,20 @@ const YearTable = props => {
     );
 };
 
-const YearTableAdapted = props => {
-    const yearedProps = {};
-    yearedProps.list = [];
+class YearTableAdapted extends React.Component {
 
-    props.list.forEach(p => {
-        const year = new Date(p.date).getFullYear();
-        // init zero numbers for each year
-        yearedProps.list.find(el => el.year === year)
-            || yearedProps.list.push({year: year, amount: 0});
+    getYearedList = datesList => {
+        const yearedList = [];
+        datesList.forEach(p => {
+            const year = new Date(p.date).getFullYear();
+            // init zero numbers for each year
+            yearedList.find(el => el.year === year)
+                || yearedList.push({ year, amount: 0 });
 
-        yearedProps.list.find(el => el.year === year).amount += p.amount;
-    });
+            yearedList.find(el => el.year === year).amount += p.amount;
+        });
+        return yearedList.sort((a, b) => a.year - b.year);
+    }
 
-    // sort by year
-    yearedProps.list = yearedProps.list.sort((a, b) => a.year - b.year);
-
-    return YearTable(yearedProps);
+    render = () => <YearTable list={this.getYearedList(this.props.list)} />;
 };

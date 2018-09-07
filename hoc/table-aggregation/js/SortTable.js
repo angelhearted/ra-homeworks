@@ -23,8 +23,7 @@ const SortTable = props => {
     );
 };
 
-const dateSort = (a, b) => a.date > b.date ? 1 : -1;
-
-const SortTableDesc = props => {
-    return SortTable({list: props.list.sort(dateSort)});
+class SortTableDesc extends React.Component {
+    dateSort = (a, b) => a.date > b.date ? 1 : -1;
+    render = () => SortTable({list: this.props.list.sort(this.dateSort)});
 };
