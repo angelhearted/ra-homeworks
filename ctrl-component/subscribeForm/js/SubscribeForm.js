@@ -2,23 +2,18 @@ class SubscribeForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      validityClass: '',
-      errorClass: ''
+      validityClass: ''
     }
   }
 
   handleInput = e => {
-    this.setState(
-      e.target.validity.valid
-      ? { validityClass: 'is-valid', errorClass: ''}
-      : { validityClass: '', errorClass: 'is-error'}
-    );
+    this.setState({ validityClass: e.target.validity.valid ? 'is-valid' : 'is-error' });
   };
 
   render() {
     return (
       <div className="subscribe__form">
-        <form className={`form form--subscribe ${this.state.validityClass} ${this.state.errorClass}`}>
+        <form className={`form form--subscribe ${this.state.validityClass}`}>
           <h4 className="form-title">Подписаться:</h4>
           <div className="form-group">
             <label htmlFor="input-email" className="sr-only">Email</label>
