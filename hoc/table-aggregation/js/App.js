@@ -19,7 +19,7 @@ class App extends React.Component {
             <div id="app">
                 <MonthTableAdapted list={this.state.list} />
                 <YearTableAdapted list={this.state.list} />
-                <SortTableDesc list={this.state.list} />
+                <SortTableAsc list={this.state.list} />
             </div>
         );
     }
