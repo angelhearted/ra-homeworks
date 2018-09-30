@@ -1,20 +1,34 @@
 'use strict';
 
+function cleanField(e) {
+  const fld = e.target;
+  const invalidChars = fld.name === "name"
+    ? /[^\w\d_-]/g
+    : fld.name === "email"
+    ? /[^\w\d@._-]/g
+    : /[^\w\d_]/g;
+  fld.value = fld.value.replace(invalidChars, '');
+}
+
 function AuthForm({onAuth}) {
-  let form;
+  const handleSubmit = e => onAuth({
+    name: e.target.name.value,
+    email: e.target.email.value,
+    password: e.target.password.value
+  });
+
   return (
-    <form className="ModalForm" action="/404/auth/" method="POST"
-      onSubmit={() => onAuth({name: form.name.value, email: form.email.value, password: form.password.value})} ref={f => form = f}>
+    <form className="ModalForm" action="/404/auth/" method="POST" onSubmit={handleSubmit}>
       <div className="Input">
-        <input required type="text" placeholder="Имя" name='name' onChange={e => e.target.value = e.target.value.replace(/[^\w\d_-]/g, '')}/>
+        <input required type="text" placeholder="Имя" name='name' onChange={cleanField}/>
         <label></label>
       </div>
       <div className="Input">
-        <input type="email" placeholder="Электронная почта" name='email' onChange={e => e.target.value = e.target.value.replace(/[^\w\d@._-]/g, '')}/>
+        <input type="email" placeholder="Электронная почта" name='email' onChange={cleanField}/>
         <label></label>
       </div>
       <div className="Input">
-        <input required type="password" placeholder="Пароль" name='password' onChange={e => e.target.value = e.target.value.replace(/[^\w\d_]/g, '')}/> />
+        <input required type="password" placeholder="Пароль" name='password' onChange={cleanField}/>
         <label></label>
       </div>
       <button type="submit">
